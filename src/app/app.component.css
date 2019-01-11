@@ -1,0 +1,18 @@
+:host{
+  display: flex; /* or inline-flex */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.contenido {
+
+}
+.login {
+	background:rgba(58,63,68,0.5);
+  border-radius: 5px;
+  box-shadow: 0 1.5px 0 0 rgba(0,0,0,0.1);
+  width:450px;
+  display: flex;
+  flex-direction: column;
+}
