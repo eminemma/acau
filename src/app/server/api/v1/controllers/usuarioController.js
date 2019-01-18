@@ -8,7 +8,7 @@ exports.GetAll = function(req,res){
   if (limite !== undefined) {
     filters['limit'] = limite;
   }
-  return db.Reparto.findAll(filters).then(result => {
+  return db.Usuario.findAll(filters).then(result => {
    return res.status(200).json(result);
   });
 }
