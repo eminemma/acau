@@ -2,7 +2,7 @@ exports.conectarDB = function (res){
 const Sequelize = require('sequelize-oracle')
 var funcion = require('../funcion');
 console.log('Conectandose a Base de Datos...');
-const sequelize = new Sequelize('desa_01', 'superusuario', 'esquema', {
+const sequelize = new Sequelize('desa_01', 'kanban', 'esquema', {
   host: 'desa-ent.loteriadecordoba.com.ar',
   dialect: 'oracle',
   operatorsAliases: false,
