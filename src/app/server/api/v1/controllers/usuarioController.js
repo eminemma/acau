@@ -1,7 +1,32 @@
-var oracle = require('../routes/conn');
+//var oracle = require('../routes/conn');
+var jwt = require('jsonwebtoken');
+const JWT_Secret = 'your_secret_key';
+exports.Authenticate = (req, res) => {
+  var testUser = { documento: 'test', password: 'test'};
 
-exports.GetAll = function(req,res){
-  var db = oracle.conectarDB(res);
+  if (req.body) {
+    var user = req.body;
+
+    if (testUser.documento===req.body.documento && testUser.password === req.body.password) {
+      var token = jwt.sign(user, JWT_Secret);
+      res.status(200).send({
+        signed_user: user,
+        token: token
+      });
+    } else {
+      res.status(403).send({
+        errorMessage: 'Se requiere autorizacion'
+      });
+    }
+  } else {
+    res.status(403).send({
+      errorMessage: 'Por favor ingresar email y password'
+    });
+  }
+}
+
+exports.GetAll = (req,res)  => {
+  /*var db = oracle.conectarDB(res);
   var limite = req.params.limite;
 
   var filters = {};
@@ -11,53 +36,53 @@ exports.GetAll = function(req,res){
   }
   return db.Usuario.findAll(filters).then(result => {
    return res.status(200).json(result);
-  });
+  });*/
 }
 
-exports.GetBy = function(){
-
-}
-
-exports.GetById = function(){
+exports.GetBy = (req,res)  => {
 
 }
 
-exports.Save = function(){
+exports.GetById = (req,res)  => {
 
 }
 
-exports.Update = function(){
+exports.Save = (req,res)  => {
 
 }
 
-exports.LockUserId() = function(){
+exports.Update = (req,res)  => {
 
 }
 
-exports.UnlockUserId() = function(){
+exports.LockUserId = (req,res)  => {
 
 }
 
-exports.RestartPassword = function(){
+exports.UnlockUserId = (req,res)  => {
 
 }
 
-exports.AddRole = function(){
+exports.RestartPassword = (req,res)  => {
 
 }
 
-exports.RemoveRole = function(){
+exports.AddRole = (req,res)  => {
 
 }
 
-exports.GetRolesAdd = function(){
+exports.RemoveRole = (req,res)  => {
 
 }
 
-exports.GetSystemasAdd = function(){
+exports.GetRolesAdd = (req,res)  => {
 
 }
 
-exports.GetSystemsMulti = function(){
+exports.GetSystemasAdd = (req,res)  => {
+
+}
+
+exports.GetSystemsMulti = (req,res)  => {
 
 }

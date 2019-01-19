@@ -1,39 +1,38 @@
-exports.conectarDB = function (res){
-const Sequelize = require('sequelize-oracle')
-var funcion = require('../funcion');
-console.log('Conectandose a Base de Datos...');
-const sequelize = new Sequelize('desa_01', 'kanban', 'esquema', {
-  host: 'desa-ent.loteriadecordoba.com.ar',
-  dialect: 'oracle',
-  operatorsAliases: false,
-  pool: {
-    max: 5,
-    min: 0,
-    acquire: 30000,
-    idle: 1000
-  }
-});
-
-sequelize
-  .authenticate()
-  .then(() => {
-    console.log('Se conecto correctamente a la base de datos.');
-  })
-  .catch(err => {
-     var m = {};
-     m.message = 'Imposible conectarse a la base de datos:'+err.message;
-     m.error = true;
-     funcion.mostrarErrorDB(m,res);
+exports.conectarDB = function(res) {
+  const Sequelize = require("sequelize-oracle");
+  var funcion = require("../funcion");
+  console.log("Conectandose a Base de Datos...");
+  const sequelize = new Sequelize("desa_01", "kanban", "esquema", {
+    host: "desa-ent.loteriadecordoba.com.ar",
+    dialect: "oracle",
+    operatorsAliases: false,
+    pool: {
+      max: 5,
+      min: 0,
+      acquire: 30000,
+      idle: 1000
+    }
   });
 
+  sequelize
+    .authenticate()
+    .then(() => {
+      console.log("Se conecto correctamente a la base de datos.");
+    })
+    .catch(err => {
+      var m = {};
+      m.message = "Imposible conectarse a la base de datos:" + err.message;
+      m.error = true;
+      funcion.mostrarErrorDB(m, res);
+    });
 
-var db = {};
-db.sequelize = sequelize; //contain a settings of database
-db.Sequelize = Sequelize;
-db.Usuario = require('../models/usuario')(db, Sequelize);
-db.Usuario.sync();
-//db.Acceso = require('../models/acceso')(db, Sequelize);
-/*db.sequelize = sequelize; //contain a settings of database
+  var db = {};
+  db.sequelize = sequelize; //contain a settings of database
+  db.Sequelize = Sequelize;
+  db.Usuario = require("../models/usuario")(db, Sequelize);
+  db.Usuario.sync();
+  //db.Acceso = require('../models/acceso')(db, Sequelize);
+  /*db.sequelize = sequelize; //contain a settings of database
 db.Sequelize = Sequelize;
 db.Acceso = require('../models/acceso')(db, Sequelize);
 db.Provincia = require('../models/provincia')(db, Sequelize);
@@ -43,11 +42,11 @@ db.TipoDocumento = require('../models/tipo_documento')(db, Sequelize);
 db.AgenciaHipica = require('../models/agencia')(db, Sequelize);
 db.AgenciaUsuario = require('../models/usuario')(db, Sequelize);*/
 
-/*db.Acceso.sync();*/
-/*db.Provincia.sync();
+  /*db.Acceso.sync();*/
+  /*db.Provincia.sync();
 db.Localidad.sync();
 db.Barrio.sync();*/
-/*db.TipoDocumento.sync({force: true}).then(function(){
+  /*db.TipoDocumento.sync({force: true}).then(function(){
     db.TipoDocumento.bulkCreate([{
     ID_TIPO_DOCUMENTO:1,
     DESCRIPCION:'DNI'
@@ -59,7 +58,7 @@ db.Barrio.sync();*/
     DESCRIPCION:'CUIL'
   }]);
 });*/
-/*db.AgenciaHipica.sync({force: true}).then(function(){
+  /*db.AgenciaHipica.sync({force: true}).then(function(){
   db.AgenciaHipica.bulkCreate([{
     ID_AGENCIA_HIPICA             :   1,
     NOMBRE_AGENCIA                :  'PRIMER AGENCIA',
@@ -85,9 +84,7 @@ db.Barrio.sync();*/
 });
 */
 
-
-
-/*db.AgenciaUsuario.sync({force: true}).then(function(){
+  /*db.AgenciaUsuario.sync({force: true}).then(function(){
   db.AgenciaUsuario.bulkCreate([{
     ID_AGENCIA_USUARIO        : 1,
     ID_TIPO_DOCUMENTO         :   1,
@@ -104,8 +101,6 @@ db.Barrio.sync();*/
   }]);
 });*/
 
-return db;
-}
+  return db;
+};
 /*module.exports = db;*/
-
-
